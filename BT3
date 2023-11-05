@@ -1,0 +1,33 @@
+Practical 3 Smart Contact for Bank system :
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+contract TipJar {
+ int depmoney;
+ int withdraw_trans;
+ int balance;
+ address public owner; // Current owner of the contract
+ constructor() {
+ owner = msg.sender;
+ }
+ modifier onlyOwner() {
+ require(msg.sender == owner, "Only the owner can call this function");
+ _;
+ }
+ function withdraw(int witm) public onlyOwner {
+ withdraw_trans= witm;
+ depmoney=depmoney-witm;
+ payable(owner).transfer(address(this).balance);
+ }
+ function deposit(int depm) public payable {
+ depmoney = depm;
+
+
+
+ // No need to specify an amount; the function should be called with the desired value.
+ }
+ function getBalance() public view returns (int256) {
+ //balance = depmoney;
+ return depmoney;
+ //address(this).balance;
+ }
+}
